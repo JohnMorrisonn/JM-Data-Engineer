@@ -76,13 +76,13 @@ def upload_file(file, filename):
     return 'https://'+bucket_name+'.'+REGION_HOST+'/visualizations/'+filename
 
 def make_visuals(goal=None,category=None, user_id=None):
-    graph1 = avg_cat_vis(df,goal,category, user_id)
+    graph1 = avg_cat_vis(goal,category, user_id)
 
     return {
         'graph1': 'test'
     }
 
-def avg_cat_vis(df,goal=None, category=None, user_id=None):
+def avg_cat_vis(goal=None, category=None, user_id=None):
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
     import plotly
