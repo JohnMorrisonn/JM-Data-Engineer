@@ -52,7 +52,6 @@ def avg_cat_vis(df,goal=None, category=None):
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
     import plotly
-    plotly.offline.init_notebook_mode(connected=True)
     import random
 
     categories_list = df['categories'].unique()
