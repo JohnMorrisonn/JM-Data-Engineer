@@ -76,8 +76,6 @@ def upload_file(file, filename):
     return 'https://'+bucket_name+'.'+REGION_HOST+'/visualizations/'+filename
 
 def make_visuals(goal=None,category=None, user_id=None):
-    df = grab_data()
-
     graph1 = avg_cat_vis(df,goal,category, user_id)
 
     return {
