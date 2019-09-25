@@ -79,7 +79,7 @@ def make_visuals(goal=None,category=None, user_id=None):
     graph1 = avg_cat_vis(goal,category, user_id)
 
     return {
-        'graph1': 'test'
+        'graph1': graph1
     }
 
 def avg_cat_vis(goal=None, category=None, user_id=None):
