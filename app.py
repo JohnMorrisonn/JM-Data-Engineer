@@ -1,7 +1,7 @@
 # Main application and routing logic
 from flask import Flask, render_template, request, jsonify
 from decouple import config
-from functions import get_query, custom_stats, nlp_df
+from functions import get_query, custom_stats, nlp_df, predict_proba
 from visualizations import avg_cat_vis, make_visuals
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
@@ -16,7 +16,7 @@ import pickle
 app = Flask(__name__)
 
 # Load in the baseline model
-filename = open('model_rf_tues.pkl', 'rb')
+filename = open('model_rf_sat.pkl', 'rb')
 model = pickle.load(filename)
 
 # print(config('hostname'))
@@ -67,27 +67,16 @@ def predict():
 
     # --------------------------------------------------------------
 
-    # Final output dict
+# Final output dict
     output = {'results': int(model_result[0]),
             'custom_stats': {
-                1 : custom_results[0],
-                2 : custom_results[1],
-                3 : custom_results[2],
-                4 : custom_results[3],
-                5 : custom_results[4],
-                6 : custom_results[5]
-            },
-            'general_stats': {
-                1 : 'general_results1',
-                2 : 'general_results2',
-                3 : 'general_results3',
-                4 : 'general_results4',
-                5 : 'general_results5',
-                6 : 'general_results6',
-                7 : 'general_results7',
-                8 : 'general_results8',
-                9 : 'general_results9',
-            },
+                'raising_more_success' : custom_results[0],
+                'category_success' : custom_results[1],
+                'category_average' : custom_results[2],
+                'average_duration' : custom_results[3],
+                'average_backers' : custom_results[4],
+                'average_over' : custom_results[5]
+            }
     }
     return jsonify(output)
 

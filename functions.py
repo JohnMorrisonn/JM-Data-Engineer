@@ -10,10 +10,32 @@ Custom data goals:
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
 
+def predict_proba(model, df):
+    positive_class = 'successful'
+    positive_class_index = 1 
+
+    # Call model for prediction
+    pred = model.predict(df)
+    predict = pred[0]
+
+    # Get predicted probability
+    pred_proba = model.predict_proba(df)[0,positive_class_index]
+
+    probability = pred_proba * 100
+
+    probability = round(probability)
+
+    # Return prediction and probability
+    # output1 = f'State is {probability:.0f}% likely to be successful'
+
+    return probability
+
+
 # Functions for querying custom stats
 def get_query(query, cursor):
     cursor.execute(query)
     return(cursor.fetchall()[0][0])
+
 
 def custom_stats(category, goal, cursor):
     # Create queries for each data goal

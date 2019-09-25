@@ -100,3 +100,31 @@ def avg_cat_vis(df,goal=None, category=None):
     plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
     return upload_file('temp.html','visual1-'+user_id+'.html')
+
+
+def gauge_pred():
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+    import plotly
+    plotly.offline.init_notebook_mode(connected=True)
+
+    df = grab_data()
+
+    probability = predict_proba(model, df)
+
+    fig = go.Figure(go.Indicator(
+        mode = "gauge+number", 
+        value = probability,
+        number = {'suffix': "%"},
+        domain = {'x': [0, 1], 'y': [0, 1]}, 
+        title = {'text': "Probability of Success", 
+                 'font':{'family':'Droid Sans Mono', 'size':40, 'color':'#7f7f7f'}},
+        gauge = {'axis': {'range': [None, 100]},
+                'bar': {'color': "#626463"},
+                'steps' : [
+                    {'range': [0, 50], 'color': "#f73a5f"}, 
+                    {'range': [50, 100], 'color': "#05ce78"}], 
+                'threshold' : {'line': {'color': "black", 'width': 1},
+                               'thickness': 1, 'value': 50}}))
+
+        
