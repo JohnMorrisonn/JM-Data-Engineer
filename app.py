@@ -14,7 +14,7 @@ import pickle
 app = Flask(__name__)
 
 # Load in the baseline model
-filename = open('model_rf_sat.pkl', 'rb')
+filename = open('model_rf_wed (2).pkl', 'rb')
 model = pickle.load(filename)
 
 
@@ -34,7 +34,7 @@ def predict():
     data_df = pd.DataFrame.from_dict(data)
 
     # If user input contains anything the model doesn't
-    drop_columns = ['name', 'blurb']
+    drop_columns = ['campaignName', 'description']
     data_df.drop(columns = drop_columns, inplace=True)
 
     # Results for RF/NLP model
