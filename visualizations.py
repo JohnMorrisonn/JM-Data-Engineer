@@ -38,7 +38,7 @@ def upload_file(file, filename):
     
     return 'https://'+bucket_name+'.'+REGION_HOST+'/visualizations/'+filename
 
-def make_visuals(goal=None,category=None):
+def make_visuals(goal=None,category=None, user_id=None):
     df = grab_data()
 
     graph1 = avg_cat_vis(df,goal,category)
@@ -98,4 +98,4 @@ def avg_cat_vis(df,goal=None, category=None):
     
     plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','thisisthis-fdfas0516.html')
+    return upload_file('temp.html','visual1-'+user_id+'.html')

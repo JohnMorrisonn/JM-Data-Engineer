@@ -96,8 +96,9 @@ def visualizations():
     # User input from front-end
     goal  = request.args.get('goal', None)
     category  = request.args.get('category', None)
+    user_id = request.args.get('category', None)
 
-    return make_visuals(goal, category)
+    return make_visuals(goal, category, user_id)
 
 
 
