@@ -42,13 +42,13 @@ def upload_file(file, filename):
 def make_visuals(goal=None,category=None, user_id=None):
     df = grab_data()
 
-    graph1 = avg_cat_vis(df,goal,category)
+    graph1 = avg_cat_vis(df,goal,category, user_id)
 
     return {
         'graph1': graph1
     }
 
-def avg_cat_vis(df,goal=None, category=None):
+def avg_cat_vis(df,goal=None, category=None, user_id=None):
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
     import plotly
