@@ -1,15 +1,13 @@
 # Main application and routing logic
 from flask import Flask, render_template, request, jsonify
 from decouple import config
-from functions import get_query, custom_stats, nlp_df, predict_proba
-from visualizations import avg_cat_vis, make_visuals
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.ensemble import RandomForestClassifier
+from functions import get_query, custom_stats
 from mysql.connector.cursor import MySQLCursorPrepared
 import os
 import pandas as pd
 import mysql.connector
 import pickle
+
 
 
 # Create the app
@@ -19,7 +17,6 @@ app = Flask(__name__)
 filename = open('model_rf_sat.pkl', 'rb')
 model = pickle.load(filename)
 
-# print(config('hostname'))
 
 # Create routes to post the prediction
 @app.route('/', methods=['POST'])
@@ -57,8 +54,8 @@ def predict():
     cursor = mydb.cursor(cursor_class=MySQLCursorPrepared)
     
     # Filter out category and monetaryGoal from user data
-    category = data_df['category']
-    goal = data_df['goal_usd']
+    category = data_df['categories']
+    goal = data_df['monetaryGoal']
 
     # Custom stats
     custom_results = custom_stats(category, goal, cursor)
@@ -77,17 +74,3 @@ def predict():
             }
     }
     return jsonify(output)
-
-@app.route('/visualizations')
-def visualizations():
-    # User input from front-end
-    goal  = request.args.get('goal', None)
-    category  = request.args.get('category', None)
-    user_id = request.args.get('user_id', None)
-
-    return make_visuals(goal, category, user_id)
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
