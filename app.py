@@ -36,10 +36,8 @@ def predict():
     data.update((x, [y]) for x, y in data.items())
     data_df = pd.DataFrame.from_dict(data)
 
-    data_df = nlp_df(data_df)
-
     # If user input contains anything the model doesn't
-    drop_columns = ['campaignName', 'description']
+    drop_columns = ['name', 'blurb']
     data_df.drop(columns = drop_columns, inplace=True)
 
     # Results for RF/NLP model
@@ -59,8 +57,8 @@ def predict():
     cursor = mydb.cursor(cursor_class=MySQLCursorPrepared)
     
     # Filter out category and monetaryGoal from user data
-    category = data_df['categories']
-    goal = data_df['monetaryGoal']
+    category = data_df['category']
+    goal = data_df['goal_usd']
 
     # Custom stats
     custom_results = custom_stats(category, goal, cursor)
