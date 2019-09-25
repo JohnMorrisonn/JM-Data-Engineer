@@ -1,4 +1,5 @@
 from decouple import config
+import pandas as pd
 
 def grab_data ():
     import mysql.connector
