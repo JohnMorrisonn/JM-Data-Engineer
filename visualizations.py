@@ -104,6 +104,7 @@ def avg_cat_vis(data):
         categories = random.sample(category_list, 5)
 
     df = grab_data(categories=categories)
+    goal = data_df['monetaryGoal']
     
     success_data = []
     fail_data = []
