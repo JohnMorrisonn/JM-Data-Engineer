@@ -228,7 +228,6 @@ def predict():
     # Final output dict
     output = {'results': int(model_result[0]),
             'custom_stats': {
-                'test_goal': goal,
                 'raising_more_success' : custom_results[0],
                 'category_success' : custom_results[1],
                 'category_average' : custom_results[2],
@@ -239,14 +238,13 @@ def predict():
     }
     return jsonify(output)
 
-@app.route('/visualizations')
+
+@app.route('/visualizations', methods=['POST'])
 def visualizations():
     # User input from front-end
-    goal  = request.args.get('goal', None)
-    category  = request.args.get('category', None)
-    user_id = request.args.get('user_id', None)
+    data = request.get_json(force=True)
 
-    return make_visuals(goal, category, user_id)
+    return make_visuals(data)
 
 
 if __name__ == "__main__":
