@@ -227,7 +227,7 @@ def predict():
     # Final output dict
     output = {'results': int(model_result[0]),
             'custom_stats': {
-                'raising_more_success' : goal,
+                'raising_more_success' : goal[0],
                 'category_success' : custom_results[1],
                 'category_average' : custom_results[2],
                 'average_duration' : custom_results[3],
