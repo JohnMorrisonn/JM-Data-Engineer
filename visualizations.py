@@ -151,7 +151,7 @@ def gauge_pred(df):
     data_df = pd.DataFrame.from_dict(df)
 
     # If user input contains anything the model doesn't
-    drop_columns = ['campaignName', 'description']
+    drop_columns = ['campaignName', 'description', 'user_id']
     data_df.drop(columns = drop_columns, inplace=True)
 
     probability = predict_proba(model, data_df)

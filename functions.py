@@ -18,7 +18,6 @@ def predict_proba(model, df):
     pred = model.predict(df)
     predict = pred[0]
     
-    df['target'] = predict
     # Get predicted probability
     pred_proba = model.predict_proba(df)[0,positive_class_index]
 
