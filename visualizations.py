@@ -148,7 +148,7 @@ def gauge_pred(df):
     
     # Change json to dataframe
     df.update((x, [y]) for x, y in df.items())
-    data_df = pd.DataFrame.from_dict(data)
+    data_df = pd.DataFrame.from_dict(df)
 
     # If user input contains anything the model doesn't
     drop_columns = ['campaignName', 'description']
