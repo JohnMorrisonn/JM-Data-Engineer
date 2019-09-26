@@ -146,12 +146,15 @@ def gauge_pred(df):
     from functions import predict_proba
     from app import model
     
+    # Change json to dataframe
     df.update((x, [y]) for x, y in df.items())
-    data_df = pd.DataFrame.from_dict(df)
+    data_df = pd.DataFrame.from_dict(data)
 
     # If user input contains anything the model doesn't
-    drop_columns = ['campaignName', 'description', 'user_id']
+    drop_columns = ['campaignName', 'description']
     data_df.drop(columns = drop_columns, inplace=True)
+
+    data_df['monetaryGoal'] = pd.to_numeric(data_df['monetaryGoal'])
 
     probability = predict_proba(model, data_df)
 
