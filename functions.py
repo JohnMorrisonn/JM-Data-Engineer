@@ -48,8 +48,9 @@ def custom_stats(category, goal, cursor):
     
     goal_4 = f'SELECT AVG(duration) FROM clean_data WHERE target = "successful" AND monetaryGoal > "{goal}";'
 
-    # Change goal to estimate or range
-    goal_5 = f'SELECT AVG(backers_count) FROM clean_data WHERE target = "successful" AND monetaryGoal = "{goal}";'
+    goal_min = goal * 0.9
+    goal_max = goal * 1.1
+    goal_5 = f'SELECT AVG(backers_count) FROM clean_data WHERE target = "successful" AND (monetaryGoal > "{goal_min}" AND monetaryGoal < "{goal_max}");'
 
     # Similar to number 3, consider revising 3 to another stat
     goal_6 = f'SELECT AVG(usd_pledged - monetaryGoal) AS diff FROM clean_data WHERE target = "successful" AND categories = "{category}";'
