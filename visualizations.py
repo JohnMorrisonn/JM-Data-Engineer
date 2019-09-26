@@ -91,13 +91,13 @@ def avg_cat_vis(data):
     from app import flipped
     import random
 
-    category = data_df['categories'].map(flipped)[0]
+    category = data['categories'].map(flipped)[0]
 
     categories = [category]
     categories.extend(random.sample(category_list, 5))
 
     df = grab_data(categories=categories)
-    goal = data_df['monetaryGoal'][0]
+    goal = data['monetaryGoal'][0]
     
     success_data = []
     fail_data = []
@@ -142,7 +142,7 @@ def gauge_pred(df):
     from functions import predict_proba
     from app import model
 
-    probability = predict_proba(model, data_df)
+    probability = predict_proba(model, df)
 
     fig = go.Figure(go.Indicator(
         mode = "gauge+number", 
@@ -158,10 +158,7 @@ def gauge_pred(df):
                     {'range': [50, 100], 'color': "#05ce78"}], 
                 'threshold' : {'line': {'color': "black", 'width': 1},
                                'thickness': 1, 'value': 50}}))
-
-    df.update((x, [y]) for x, y in df.items())
-    data_df = pd.DataFrame.from_dict(df)
-
+    
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
     return upload_file('temp.html','visual1-'+str(data_df['user_id'][0])+'.html')
