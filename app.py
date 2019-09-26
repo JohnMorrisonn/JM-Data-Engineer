@@ -200,7 +200,6 @@ def predict():
     data_df.drop(columns = drop_columns, inplace=True)
 
     # Results for RF/NLP model
-    # NEED TO: use pred_proba still
     model_result = model.predict(data_df)
     
     # --------------------------------------------------------------
@@ -242,7 +241,7 @@ def predict():
 @app.route('/visualizations', methods=['POST'])
 def visualizations():
     # User input from front-end
-    data = request.get_json()
+    data = request.get_json(force=True)
 
     # Change json to dataframe
     data.update((x, [y]) for x, y in data.items())
