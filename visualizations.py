@@ -91,10 +91,6 @@ def avg_cat_vis(data):
     from app import flipped
     import random
 
-    # Change json to dataframe
-    data.update((x, [y]) for x, y in data.items())
-    data_df = pd.DataFrame.from_dict(data)
-
     category = data_df['categories'].map(flipped)[0]
 
     categories = [category]
@@ -145,14 +141,6 @@ def gauge_pred(df):
     import plotly
     from functions import predict_proba
     from app import model
-    
-    # Change json to dataframe
-    df.update((x, [y]) for x, y in df.items())
-    data_df = pd.DataFrame.from_dict(df)
-
-    # If user input contains anything the model doesn't
-    drop_columns = ['campaignName', 'description', 'user_id']
-    data_df.drop(columns = drop_columns, inplace=True)
 
     probability = predict_proba(model, data_df)
 

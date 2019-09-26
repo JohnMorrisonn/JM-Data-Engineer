@@ -242,7 +242,15 @@ def predict():
 @app.route('/visualizations', methods=['POST'])
 def visualizations():
     # User input from front-end
-    data = request.get_json(force=True)
+    data = request.get_json()
+
+    # Change json to dataframe
+    data.update((x, [y]) for x, y in data.items())
+    data_df = pd.DataFrame.from_dict(data)
+
+    # If user input contains anything the model doesn't
+    drop_columns = ['campaignName', 'description']
+    data_df.drop(columns = drop_columns, inplace=True)
 
     return make_visuals(data)
 
