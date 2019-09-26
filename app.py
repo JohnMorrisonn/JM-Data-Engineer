@@ -2,12 +2,14 @@
 from flask import Flask, render_template, request, jsonify
 from decouple import config
 from functions import get_query, custom_stats
+from visualizations import make_visuals
 from mysql.connector.cursor import MySQLCursorPrepared
 import os
 import pandas as pd
 import mysql.connector
 import pickle
 
+# Remove later ##
 flipped = {0: 'Space Exploration',
  1: 'Wearables',
  2: 'Hardware',
@@ -220,7 +222,7 @@ def predict():
 
     # --------------------------------------------------------------
 
-# Final output dict
+    # Final output dict
     output = {'results': int(model_result[0]),
             'custom_stats': {
                 'raising_more_success' : custom_results[0],
@@ -233,4 +235,15 @@ def predict():
     }
     return jsonify(output)
 
+@app.route('/visualizations')
+def visualizations():
+    # User input from front-end
+    goal  = request.args.get('goal', None)
+    category  = request.args.get('category', None)
+    user_id = request.args.get('user_id', None)
 
+    return make_visuals(goal, category, user_id)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
