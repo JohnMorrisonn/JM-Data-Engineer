@@ -236,7 +236,7 @@ def predict():
                 'average_backers' : custom_results[4],
                 'average_over' : custom_results[5]
             },
-            'prediction_results': probability
+            'prediction_results': int(probability)
     }
     return jsonify(output)
 
