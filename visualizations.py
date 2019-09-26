@@ -136,7 +136,7 @@ def avg_cat_vis(data):
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual1-'+data_df['user_id'][0]+'.html')
+    return upload_file('temp.html','visual1-'+str(data_df['user_id'][0])+'.html')
 
 
 def gauge_pred(df):
@@ -169,6 +169,9 @@ def gauge_pred(df):
                 'threshold' : {'line': {'color': "black", 'width': 1},
                                'thickness': 1, 'value': 50}}))
 
+    df.update((x, [y]) for x, y in df.items())
+    data_df = pd.DataFrame.from_dict(df)
+
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual1-'+data_df['user_id']+'.html')
+    return upload_file('temp.html','visual1-'+str(data_df['user_id'][0])+'.html')
