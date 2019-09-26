@@ -101,7 +101,7 @@ def avg_cat_vis(data):
     categories.extend(random.sample(category_list, 5))
 
     df = grab_data(categories=categories)
-    goal = data_df['monetaryGoal']
+    goal = data_df['monetaryGoal'][0]
     
     success_data = []
     fail_data = []
@@ -136,7 +136,7 @@ def avg_cat_vis(data):
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual1-'+data_df['user_id']+'.html')
+    return upload_file('temp.html','visual1-'+data_df['user_id'][0]+'.html')
 
 
 def gauge_pred(df):
