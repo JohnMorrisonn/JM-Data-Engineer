@@ -154,7 +154,7 @@ def gauge_pred(df):
     drop_columns = ['campaignName', 'description']
     data_df.drop(columns = drop_columns, inplace=True)
 
-    data_df['monetaryGoal'] = pd.to_numeric(data_df['monetaryGoal'])
+    data_df['monetaryGoal'][0] = pd.to_numeric(data_df['monetaryGoal'][0])
 
     probability = predict_proba(model, data_df)
 
