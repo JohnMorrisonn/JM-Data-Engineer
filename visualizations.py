@@ -153,6 +153,8 @@ def gauge_pred(df):
     drop_columns = ['campaignName', 'description', 'user_id']
     data_df.drop(columns = drop_columns, inplace=True)
 
+    data_df['monetaryGoal'] = int(data_df['monetaryGoal'])
+
     probability = predict_proba(model, data_df)
 
     fig = go.Figure(go.Indicator(
