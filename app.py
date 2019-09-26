@@ -176,7 +176,7 @@ app.config['JSON_SORT_KEYS'] = False
 
 
 # Load in the baseline model
-filename = open('model_rd_thurs.pkl', 'rb')
+filename = open('model_rf_thurs.pkl', 'rb')
 model = pickle.load(filename)
 
 
