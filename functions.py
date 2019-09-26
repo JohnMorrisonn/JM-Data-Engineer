@@ -14,6 +14,8 @@ def predict_proba(model, df):
     positive_class = 'successful'
     positive_class_index = 1 
 
+    df['monetaryGoal'] = df['monetaryGoal'].astype('int64')
+
     # Call model for prediction
     pred = model.predict(df)
     predict = pred[0]
