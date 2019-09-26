@@ -91,7 +91,11 @@ def avg_cat_vis(data):
     from app import flipped
     import random
 
-    category = data['categories'].map(flipped)[0]
+    # Change json to dataframe
+    data.update((x, [y]) for x, y in data.items())
+    data_df = pd.DataFrame.from_dict(data)
+
+    category = data_df['categories'].map(flipped)[0]
 
     if category != None:
         categories = [category]
@@ -138,7 +142,7 @@ def avg_cat_vis(data):
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual1-'+data['user_id']+'.html')
+    return upload_file('temp.html','visual1-'+data_df['user_id']+'.html')
 
 
 def gauge_pred(df):
@@ -171,4 +175,6 @@ def gauge_pred(df):
                 'threshold' : {'line': {'color': "black", 'width': 1},
                                'thickness': 1, 'value': 50}}))
 
-        
+    test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
+    
+    return upload_file('temp.html','visual1-'+data_df['user_id']+'.html')
