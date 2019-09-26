@@ -132,7 +132,7 @@ def avg_cat_vis(data):
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual1-'+str(data_df['user_id'][0])+'.html')
+    return upload_file('temp.html','visual1-'+str(data['user_id'][0])+'.html')
 
 
 def gauge_pred(df):
@@ -141,8 +141,10 @@ def gauge_pred(df):
     import plotly
     from functions import predict_proba
     from app import model
+    
+    df1 = df.drop(columns = ['user_id'])
 
-    probability = predict_proba(model, df)
+    probability = predict_proba(model, df1)
 
     fig = go.Figure(go.Indicator(
         mode = "gauge+number", 
@@ -161,4 +163,4 @@ def gauge_pred(df):
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual1-'+str(data_df['user_id'][0])+'.html')
+    return upload_file('temp.html','visual1-'+str(df['user_id'][0])+'.html')
