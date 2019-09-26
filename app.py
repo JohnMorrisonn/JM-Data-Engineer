@@ -172,6 +172,8 @@ flipped = {0: 'Space Exploration',
 
 # Create the app
 app = Flask(__name__)
+app.config['JSON_SORT_KEYS'] = False
+
 
 # Load in the baseline model
 filename = open('model.pkl', 'rb')
@@ -227,10 +229,10 @@ def predict():
             'custom_stats': {
                 'raising_more_success' : custom_results[0],
                 'category_success' : custom_results[1],
-                'category_average' : custom_results[2],
-                'average_duration' : custom_results[3],
-                'average_backers' : custom_results[4],
-                'average_over' : custom_results[5]
+                'category_average' : int(custom_results[2]),
+                'average_duration' : int(custom_results[3]),
+                'average_backers' : int(custom_results[4]),
+                'average_over' : int(custom_results[5])
             }
     }
     return jsonify(output)
