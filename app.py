@@ -217,7 +217,8 @@ def predict():
     
     # Filter out category and monetaryGoal from user data
     category = data_df['categories'].map(flipped)[0]
-    goal = data_df['monetaryGoal']
+    goal = int(data_df['monetaryGoal'][0])
+
 
     # Custom stats
     custom_results = custom_stats(category, goal, cursor)
@@ -227,7 +228,8 @@ def predict():
     # Final output dict
     output = {'results': int(model_result[0]),
             'custom_stats': {
-                'raising_more_success' : str(goal[0]),
+                'test_goal': goal,
+                'raising_more_success' : custom_results[0],
                 'category_success' : custom_results[1],
                 'category_average' : custom_results[2],
                 'average_duration' : custom_results[3],
