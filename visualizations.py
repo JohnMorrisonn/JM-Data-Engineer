@@ -75,19 +75,23 @@ def upload_file(file, filename):
     
     return 'https://'+bucket_name+'.'+REGION_HOST+'/visualizations/'+filename
 
-def make_visuals(goal=None,category=None, user_id=None):
-    graph1 = avg_cat_vis(goal,category, user_id)
+def make_visuals(data):
+    graph1 = avg_cat_vis(data)
+    graph3 = gauge_pred(data)
 
     return {
         'graph1': graph1,
-        'graph2': graph1
+        'graph3': graph3
     }
 
-def avg_cat_vis(goal=None, category=None, user_id=None):
+def avg_cat_vis(data):
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
     import plotly
+    from app import flipped
     import random
+
+    category = data['categories'].map(flipped)[0]
 
     if category != None:
         categories = [category]
@@ -134,32 +138,37 @@ def avg_cat_vis(goal=None, category=None, user_id=None):
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual1-'+user_id+'.html')
+    return upload_file('temp.html','visual1-'+data['user_id']+'.html')
 
 
-# def gauge_pred():
-#     import plotly.graph_objects as go
-#     from plotly.subplots import make_subplots
-#     import plotly
-#     plotly.offline.init_notebook_mode(connected=True)
+def gauge_pred(df):
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+    import plotly
+    from functions import predict_proba
+    
+    df.update((x, [y]) for x, y in df.items())
+    data_df = pd.DataFrame.from_dict(df)
 
-#     df = grab_data()
+    # If user input contains anything the model doesn't
+    drop_columns = ['campaignName', 'description', 'user_id']
+    data_df.drop(columns = drop_columns, inplace=True)
 
-#     probability = predict_proba(model, df)
+    probability = predict_proba(model, data)
 
-#     fig = go.Figure(go.Indicator(
-#         mode = "gauge+number", 
-#         value = probability,
-#         number = {'suffix': "%"},
-#         domain = {'x': [0, 1], 'y': [0, 1]}, 
-#         title = {'text': "Probability of Success", 
-#                  'font':{'family':'Droid Sans Mono', 'size':40, 'color':'#7f7f7f'}},
-#         gauge = {'axis': {'range': [None, 100]},
-#                 'bar': {'color': "#626463"},
-#                 'steps' : [
-#                     {'range': [0, 50], 'color': "#f73a5f"}, 
-#                     {'range': [50, 100], 'color': "#05ce78"}], 
-#                 'threshold' : {'line': {'color': "black", 'width': 1},
-#                                'thickness': 1, 'value': 50}}))
+    fig = go.Figure(go.Indicator(
+        mode = "gauge+number", 
+        value = probability,
+        number = {'suffix': "%"},
+        domain = {'x': [0, 1], 'y': [0, 1]}, 
+        title = {'text': "Probability of Success", 
+                 'font':{'family':'Droid Sans Mono', 'size':40, 'color':'#7f7f7f'}},
+        gauge = {'axis': {'range': [None, 100]},
+                'bar': {'color': "#626463"},
+                'steps' : [
+                    {'range': [0, 50], 'color': "#f73a5f"}, 
+                    {'range': [50, 100], 'color': "#05ce78"}], 
+                'threshold' : {'line': {'color': "black", 'width': 1},
+                               'thickness': 1, 'value': 50}}))
 
         
