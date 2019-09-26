@@ -14,7 +14,7 @@ import pickle
 app = Flask(__name__)
 
 # Load in the baseline model
-filename = open('model_rf_wed (2).pkl', 'rb')
+filename = open('model.pkl', 'rb')
 model = pickle.load(filename)
 
 
