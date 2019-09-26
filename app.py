@@ -212,7 +212,7 @@ def predict():
     cursor = mydb.cursor(cursor_class=MySQLCursorPrepared)
     
     # Filter out category and monetaryGoal from user data
-    category = data_df['categories'].map(flipped)
+    category = data_df['categories'].map(flipped)[0]
     goal = data_df['monetaryGoal']
 
     # Custom stats
