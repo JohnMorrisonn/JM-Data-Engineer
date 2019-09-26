@@ -147,19 +147,21 @@ def gauge_pred(df):
     probability = predict_proba(model, df1)
 
     fig = go.Figure(go.Indicator(
-        mode = "gauge+number", 
-        value = probability,
-        number = {'suffix': "%"},
-        domain = {'x': [0, 1], 'y': [0, 1]}, 
-        title = {'text': "Probability of Success", 
-                 'font':{'family':'Droid Sans Mono', 'size':40, 'color':'#7f7f7f'}},
-        gauge = {'axis': {'range': [None, 100]},
-                'bar': {'color': "#626463"},
-                'steps' : [
-                    {'range': [0, 50], 'color': "#f73a5f"}, 
-                    {'range': [50, 100], 'color': "#05ce78"}], 
-                'threshold' : {'line': {'color': "black", 'width': 1},
-                               'thickness': 1, 'value': 50}}))
+    mode = "gauge+number", 
+    value = probability,
+    number = {'suffix': "%", 'font': {'family':'Prata', 'size':100, 'color':'black'}},
+    domain = {'x': [0, 1], 'y': [0, 1]},
+    title = {'text': "Probability of Success", 'font':{'family':'Lato', 'size':40, 'color':'black'}},
+    gauge = {'axis': {'range': [None, 100]},
+             'bar': {'color': "black"},
+             'borderwidth': 2,
+             'bordercolor': "#3a3a3a",
+             'steps' : [
+                 {'range': [0, 50], 'color': "#f73a5f"}, 
+                 {'range': [50, 100], 'color': "#05ce78"}], 
+             'threshold' : {'line': {'color': "black", 'width': 1}, 'thickness': 1, 'value': 50}}))
+
+    fig.update_layout(font = {'color': "black", 'size':15, 'family': "Arial"})
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
