@@ -1,7 +1,7 @@
 # Main application and routing logic
 from flask import Flask, render_template, request, jsonify
 from decouple import config
-from functions import get_query, custom_stats
+from functions import get_query, custom_stats, predict_proba
 from visualizations import make_visuals
 from mysql.connector.cursor import MySQLCursorPrepared
 import os
@@ -224,6 +224,8 @@ def predict():
 
     # --------------------------------------------------------------
 
+    probability = predict_proba(model, data_df)
+
     # Final output dict
     output = {'results': int(model_result[0]),
             'custom_stats': {
@@ -233,7 +235,8 @@ def predict():
                 'average_duration' : custom_results[3],
                 'average_backers' : custom_results[4],
                 'average_over' : custom_results[5]
-            }
+            },
+            'prediction_results': probability
     }
     return jsonify(output)
 

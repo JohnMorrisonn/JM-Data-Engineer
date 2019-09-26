@@ -152,7 +152,7 @@ def gauge_pred(df):
     value = probability,
     number = {'suffix': "%", 'font': {'family':'Prata', 'size':100, 'color':'black'}},
     domain = {'x': [0, 1], 'y': [0, 1]},
-    title = {'text': "Probability of Success", 'font':{'family':'Lato', 'size':40, 'color':'black'}},
+    title = {'text': "Your Probability of Success", 'font':{'family':'Lato', 'size':40, 'color':'black'}},
     gauge = {'axis': {'range': [None, 100]},
              'bar': {'color': "black"},
              'borderwidth': 2,
