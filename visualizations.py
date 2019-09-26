@@ -86,7 +86,8 @@ def make_visuals(data):
 
     data_df['monetaryGoal'] = pd.to_numeric(data_df['monetaryGoal'])
     return {
-        'test': data_df['monetaryGoal']
+        'test': len(data_df['monetaryGoal'])
+        'test2': data_df['monetaryGoal'][0]
     }
 
     graph1 = avg_cat_vis(data)
