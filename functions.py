@@ -40,9 +40,9 @@ def get_query(query, cursor):
 def custom_stats(category, goal, cursor):
     # Create queries for each data goal
 
-    goal_1 = f'SELECT COUNT(campaignName) FROM clean_data WHERE target = "successful" AND monetaryGoal > "{goal}";'
+    goal_1 = f'SELECT COUNT(*) FROM clean_data WHERE target = "successful" AND monetaryGoal > "{goal}";'
 
-    goal_2 = f'SELECT COUNT(campaignName) / (SELECT COUNT(*) FROM clean_data WHERE categories = "{category}") FROM clean_data WHERE target = "successful" AND categories = "{category}";'
+    goal_2 = f'SELECT COUNT(*) / (SELECT COUNT(*) FROM clean_data WHERE categories = "{category}") FROM clean_data WHERE target = "successful" AND categories = "{category}";'
 
     goal_3 = f'SELECT AVG(usd_pledged) FROM clean_data WHERE target = "successful" AND categories = "{category}";'
     
@@ -101,3 +101,8 @@ def nlp_df(data_df):
     assert len(df_merged) == len(data_df)
     
     return df_merged
+
+
+
+
+
