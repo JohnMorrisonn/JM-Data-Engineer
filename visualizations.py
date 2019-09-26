@@ -144,6 +144,7 @@ def gauge_pred(df):
     from plotly.subplots import make_subplots
     import plotly
     from functions import predict_proba
+    from app import model
     
     df.update((x, [y]) for x, y in df.items())
     data_df = pd.DataFrame.from_dict(df)
