@@ -78,7 +78,7 @@ def upload_file(file, filename):
 def make_visuals(data):
     # Change json to dataframe
     data.update((x, [y]) for x, y in data.items())
-    data_df = pd.DataFrame.from_dict(df)
+    data_df = pd.DataFrame.from_dict(data)
 
     # If user input contains anything the model doesn't
     drop_columns = ['campaignName', 'description']
