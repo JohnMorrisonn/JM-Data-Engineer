@@ -163,4 +163,4 @@ def gauge_pred(df):
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual1-'+str(df['user_id'][0])+'.html')
+    return upload_file('temp.html','visual3-'+str(df['user_id'][0])+'.html')
