@@ -81,6 +81,7 @@ def make_visuals(data):
 
     return {
         'graph1': graph1,
+        'graph2': graph1,
         'graph3': graph3
     }
 
