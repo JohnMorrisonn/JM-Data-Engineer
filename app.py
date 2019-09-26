@@ -252,7 +252,7 @@ def visualizations():
     drop_columns = ['campaignName', 'description']
     data_df.drop(columns = drop_columns, inplace=True)
 
-    return make_visuals(data)
+    return make_visuals(data_df)
 
 
 if __name__ == "__main__":
