@@ -97,11 +97,8 @@ def avg_cat_vis(data):
 
     category = data_df['categories'].map(flipped)[0]
 
-    if category != None:
-        categories = [category]
-        categories.extend(random.sample(category_list, 5))
-    else:
-        categories = random.sample(category_list, 5)
+    categories = [category]
+    categories.extend(random.sample(category_list, 5))
 
     df = grab_data(categories=categories)
     goal = data_df['monetaryGoal']
@@ -119,27 +116,23 @@ def avg_cat_vis(data):
             go.Bar(name='Success', x=categories, y=success_data),
             go.Bar(name='Failed', x=categories, y=fail_data)
         ])
-    if goal == None:
-        fig.update_layout(
-                barmode='group'
-            )
-    else:
-        fig.update_layout(
-            barmode='group',
-            shapes=[
-                go.layout.Shape(
-                    type="line",
-                    xref="paper",
-                    x0=0,
-                    y0=goal,
-                    x1=1,
-                    y1=goal,
-                    line=dict(
-                        width=2,
-                        dash="solid",
-                    )
-                )]
-            )
+
+    fig.update_layout(
+        barmode='group',
+        shapes=[
+            go.layout.Shape(
+                type="line",
+                xref="paper",
+                x0=0,
+                y0=goal,
+                x1=1,
+                y1=goal,
+                line=dict(
+                    width=2,
+                    dash="solid",
+                )
+            )]
+        )
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
