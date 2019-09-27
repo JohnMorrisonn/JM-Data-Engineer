@@ -44,7 +44,7 @@ def grab_data (categories=None):
     user = config('username')
     passwd = config('password')
     db = config('database_name')
-    engine_str = 'mysql+mysqlconnector://'+username+':'+password+'@'+hostname+':'+port+'/'+database_name  
+    engine_str = 'mysql+mysqlconnector://'+user+':'+passwd+'@'+host+':3306/'+db  
     
     if categories != None:
         query = 'SELECT * FROM clean_data WHERE categories IN ({})'.format(', '.join(['%s' for _ in categories]))
