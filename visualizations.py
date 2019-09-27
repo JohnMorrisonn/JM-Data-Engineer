@@ -116,22 +116,11 @@ def avg_cat_vis(data):
         d = df[(df['categories'] == cat) & (df['target'] == 'failed')]
         fail_data.append(d['monetaryGoal'].mean())
     
-    text1 = []
-    text2 = []
-    for row in range(len(success_data)):
-        temp= '<b>Suceed!</b><br>Avg Goal: $'+str(int(success_data[row]))
-        text1.append(temp)
-    for row in range(len(fail_data)):
-        temp = '<b>Failed!</b><br>Avg Goal: $'+str(int(fail_data[row]))
-        text2.append(temp)
-    
     fig = go.Figure(data=[
             go.Bar(
                 name='Success',
                 x=categories,
                 y=success_data,
-                hovertext=text1,
-                hoverinfo='text',
                 marker=dict(
                     color='rgb(5, 206, 120)'
                 )
@@ -140,8 +129,6 @@ def avg_cat_vis(data):
                 name='Failed',
                 x=categories,
                 y=fail_data,
-                hovertext=text2,
-                hoverinfo='text',
                 marker=dict(
                     color='rgb(247, 58, 95)'
                 )
