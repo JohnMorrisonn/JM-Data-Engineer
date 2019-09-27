@@ -1,7 +1,7 @@
 # Main application and routing logic
 from flask import Flask, render_template, request, jsonify
 from decouple import config
-from functions import get_query, custom_stats, predict_proba
+from functions import get_query, custom_stats
 from visualizations import make_visuals
 from mysql.connector.cursor import MySQLCursorPrepared
 import os
@@ -176,7 +176,7 @@ app.config['JSON_SORT_KEYS'] = False
 
 
 # Load in the baseline model
-filename = open('model_rf_thurs.pkl', 'rb')
+filename = open('model.pkl', 'rb')
 model = pickle.load(filename)
 
 
@@ -200,6 +200,7 @@ def predict():
     data_df.drop(columns = drop_columns, inplace=True)
 
     # Results for RF/NLP model
+    # NEED TO: use pred_proba still
     model_result = model.predict(data_df)
     
     # --------------------------------------------------------------
@@ -224,8 +225,6 @@ def predict():
 
     # --------------------------------------------------------------
 
-    probability = predict_proba(model, data_df)
-
     # Final output dict
     output = {'results': int(model_result[0]),
             'custom_stats': {
@@ -235,8 +234,7 @@ def predict():
                 'average_duration' : custom_results[3],
                 'average_backers' : custom_results[4],
                 'average_over' : custom_results[5]
-            },
-            'prediction_results': int(probability)
+            }
     }
     return jsonify(output)
 
@@ -244,7 +242,7 @@ def predict():
 @app.route('/visualizations', methods=['POST'])
 def visualizations():
     # User input from front-end
-    data = request.get_json(force=True)
+    data = request.get_json()
 
     # Change json to dataframe
     data.update((x, [y]) for x, y in data.items())
