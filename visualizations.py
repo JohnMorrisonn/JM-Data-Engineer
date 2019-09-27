@@ -288,7 +288,7 @@ def gauge_pred(df):
                  {'range': [50, 100], 'color': "#05ce78"}], 
              'threshold' : {'line': {'color': "black", 'width': 1}, 'thickness': 1, 'value': 50}}))
 
-    fig.update_layout(height=400, font = {'color': "black", 'size':15, 'family': "Prata"})
+    fig.update_layout(height=300, font = {'color': "black", 'size':15, 'family': "Prata"})
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
