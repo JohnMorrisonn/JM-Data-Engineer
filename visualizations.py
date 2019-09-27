@@ -115,11 +115,37 @@ def avg_cat_vis(data):
         d = df[(df['categories'] == cat) & (df['target'] == 'failed')]
         fail_data.append(d['monetaryGoal'].mean())
     
+    text1 = []
+    text2 = []
+    for row in range(len(success_data)):
+        temp= '<b>Suceed!</b><br>Avg Goal: $'+str(int(success_data[row]))
+        text1.append(temp)
+        temp = '<b>Failed!</b><br>Avg Goal: $'+str(int(fail_data[row]))
+        text2.append(temp)
+    
     fig = go.Figure(data=[
-            go.Bar(name='Success', x=categories, y=success_data),
-            go.Bar(name='Failed', x=categories, y=fail_data)
+            go.Bar(
+                name='Success',
+                x=categories,
+                y=success_data,
+                hovertext=text1,
+                hoverinfo='text',
+                marker=dict(
+                    color='rgb(5, 206, 120)'
+                )
+            ),
+            go.Bar(
+                name='Failed',
+                x=categories,
+                y=fail_data,
+                hovertext=text2,
+                hoverinfo='text',
+                marker=dict(
+                    color='rgb(247, 58, 95)'
+                )
+            )
         ])
-
+    
     fig.update_layout(
         barmode='group',
         shapes=[
@@ -133,8 +159,19 @@ def avg_cat_vis(data):
                 line=dict(
                     width=2,
                     dash="solid",
-                )
-            )]
+                ),
+                name='goal'
+            )
+        ],
+        annotations=[
+            go.layout.Annotation(
+                x=2,
+                y=int(goal)*1.1,
+                text="Your Goal - $" + str(goal),
+                showarrow=False
+            )
+        ],
+        plot_bgcolor='#fff',
         )
     
     test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
