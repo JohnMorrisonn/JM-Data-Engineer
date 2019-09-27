@@ -97,6 +97,7 @@ def avg_cat_vis(data):
     import plotly
     from app import flipped
     import random
+    import numpy as np
 
     category = data['categories'].map(flipped)[0]
 
@@ -120,6 +121,8 @@ def avg_cat_vis(data):
     for row in range(len(success_data)):
         temp= '<b>Suceed!</b><br>Avg Goal: $'+str(int(success_data[row]))
         text1.append(temp)
+        if fail_data[row] == np.NaN:
+            fail_data[row] = 1
         temp = '<b>Failed!</b><br>Avg Goal: $'+str(int(fail_data[row]))
         text2.append(temp)
     
