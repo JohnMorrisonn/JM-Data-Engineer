@@ -1,7 +1,7 @@
 # Main application and routing logic
 from flask import Flask, render_template, request, jsonify
 from decouple import config
-from functions import get_query, custom_stats
+from functions import get_query, custom_stats, predict_proba
 from visualizations import make_visuals
 from mysql.connector.cursor import MySQLCursorPrepared
 import os
