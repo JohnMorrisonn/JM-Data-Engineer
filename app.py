@@ -224,6 +224,8 @@ def predict():
     custom_results = custom_stats(category, goal, cursor)
 
     # --------------------------------------------------------------
+    
+    probability = predict_proba(model, data_df)
 
     # Final output dict
     output = {'results': int(model_result[0]),
@@ -234,7 +236,8 @@ def predict():
                 'average_duration' : custom_results[3],
                 'average_backers' : custom_results[4],
                 'average_over' : custom_results[5]
-            }
+            },
+            'prediction_results': int(probability)
     }
     return jsonify(output)
 
