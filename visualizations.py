@@ -256,9 +256,9 @@ def back_vs_goal(data):
     ]
     )
     
-    plotly.offline.plot(fig, filename='staticvisual.html')
+    test = plotly.offline.plot(fig, filename='temp.html', auto_open=False)
     
-    return upload_file('temp.html','visual2-'+str(data_df['user_id'][0])+'.html')
+    return upload_file('temp.html','visual2-'+str(data['user_id'][0])+'.html')
 
 
 
