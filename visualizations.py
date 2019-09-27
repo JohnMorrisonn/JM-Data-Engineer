@@ -121,9 +121,9 @@ def avg_cat_vis(data):
     for row in range(len(success_data)):
         temp= '<b>Suceed!</b><br>Avg Goal: $'+str(int(success_data[row]))
         text1.append(temp)
-        for row in range(len(fail_data)):
-            temp = '<b>Failed!</b><br>Avg Goal: $'+str(int(fail_data[row]))
-            text2.append(temp)
+    for row in range(len(fail_data)):
+        temp = '<b>Failed!</b><br>Avg Goal: $'+str(int(fail_data[row]))
+        text2.append(temp)
     
     fig = go.Figure(data=[
             go.Bar(
