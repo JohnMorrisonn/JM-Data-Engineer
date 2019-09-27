@@ -276,7 +276,7 @@ def gauge_pred(df):
     fig = go.Figure(go.Indicator(
     mode = "gauge+number", 
     value = probability,
-    number = {'suffix': "%", 'font': {'family':'Prata', 'size':100, 'color':'black'}},
+    number = {'suffix': "%", 'font': {'family':'Prata', 'size':65, 'color':'black'}},
     domain = {'x': [0, 1], 'y': [0, 1]},
     title = {'text': "Your Probability of Success", 'font':{'family':'Lato', 'size':40, 'color':'black'}},
     gauge = {'axis': {'range': [None, 100]},
