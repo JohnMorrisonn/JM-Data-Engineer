@@ -36,7 +36,7 @@ category_list = ['Space Exploration', 'Wearables', 'Hardware', 'Software', 'Web'
        'Theater', 'Comics', 'Plays', 'Journalism', 'Audio',
        'Literary Spaces', 'Live Games', 'Taxidermy']
 
-def grab_data (categories=None):
+def grab_data (categories=None, goal=None):
     import mysql.connector
     import sqlalchemy as db
 
