@@ -259,8 +259,6 @@ def back_vs_goal(data):
     plotly.offline.plot(fig, filename='staticvisual.html')
     
     return upload_file('temp.html','visual1-'+str(data_df['user_id'][0])+'.html')
-    
-back_vs_goal().show()
 
 
 
